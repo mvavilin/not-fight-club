@@ -1,0 +1,135 @@
+@use 'variables' as *;
+
+// Сброс и базовые стили
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  height: 100%;
+  font-size: 1px;
+}
+
+body {
+  height: 100%;
+  font-family: $font-main;
+  font-size: var(--font-size-base);
+  background: $color-bg;
+  color: $color-text-dark;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+button {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+
+  background: none;
+  border: 0;
+
+  font: inherit;
+  color: inherit;
+  line-height: inherit;
+  text-align: inherit;
+  letter-spacing: inherit;
+  text-decoration: none;
+
+  border-radius: 0;
+  box-shadow: none;
+  outline: none;
+
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+button::-moz-focus-inner {
+  border: 0;
+  padding: 0;
+}
+
+button:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font: inherit;
+  line-height: inherit;
+  color: inherit;
+}
+
+input,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  border: none;
+  outline: none;
+  box-shadow: none;
+  appearance: none;
+  -moz-appearance: none;
+}
+
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: none;
+  box-shadow: $focus-ring;
+  border-radius: $radius-base;
+}
+
+::placeholder {
+  color: currentColor;
+  opacity: .55;
+}
+
+:disabled {
+  cursor: not-allowed;
+  opacity: .6;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  margin: 0;
+  appearance: none;
+}
+
+input[type="file"] {
+  color: inherit;
+}
+
+input[type="file"]::-webkit-file-upload-button {
+  font: inherit;
+  padding: .5rem .75rem;
+  border: 0;
+  background: rgba(0, 0, 0, .06);
+  border-radius: .375rem;
+}
+
+input[type="button"],
+input[type="submit"],
+button {
+  cursor: pointer;
+  font: inherit;
+}

@@ -1,0 +1,47 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+.modal {
+  @include flex(column, flex-start, flex-start, var(--space-md));
+  padding: var(--space-lg);
+  border-radius: $radius-base;
+  background-color: $color-bg-transparent;
+
+  &__header {
+    @include flex(column, flex-start, flex-start, var(--space-md));
+    flex-grow: 1;
+    width: 100%;
+  }
+
+  &__title {
+
+    &--main {
+      align-self: center;
+    }
+  }
+
+  &__body {
+    @include flex(column, flex-start, flex-start, var(--space-sm));
+    width: 100%;
+  }
+
+  &__form-field {
+    @include flex(column, flex-start, flex-start, var(--space-sm));
+    width: 100%;
+  }
+
+  &__label {}
+
+  &__input {}
+
+  &__footer {
+    flex-grow: 1;
+    width: 100%;
+  }
+
+  &__button {
+    width: 100%;
+  }
+}
+
+.modal--register {}

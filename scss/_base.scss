@@ -1,3 +1,7 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+// Подключение шрифтов
 @font-face {
   font-family: 'Orbitron';
   src: url('../assets/fonts/Orbitron/Orbitron-VariableFont_wght.ttf') format('truetype');
@@ -7,14 +11,63 @@
 
 @font-face {
   font-family: 'Nunito';
-  src: url('../static/fonts/Nunito-VariableFont_wght.ttf') format('truetype');
+  src: url('../assets/fonts/Nunito/Nunito-VariableFont_wght.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Nunito';
-  src: url('../static/fonts/Nunito-Italic-VariableFont_wght.ttf') format('truetype');
+  src: url('../assets/fonts/Nunito/Nunito-Italic-VariableFont_wght.ttf') format('truetype');
   font-weight: normal;
   font-style: italic;
+}
+
+// Основные стили макета
+.main {
+  @include flex();
+  height: 100%;
+  background: var(--main-bg-image) center/cover no-repeat;
+}
+
+.input-fields {
+  border-radius: $radius-base;
+  width: 100%;
+  padding: var(--space-xs);
+  background-color: $color-bg;
+  font-family: $font-main;
+  font-size: var(--font-size-base);
+  color: $color-text-dark;
+
+  &:focus {
+    outline: none;
+    box-shadow: $focus-ring;
+  }
+}
+
+.button {
+  border-radius: $radius-base;
+  background: $btn-gradient;
+  background-size: 150% 150%;
+  background-position: left top;
+  padding: var(--space-xs) var(--space-md);
+  color: $color-text-light;
+  text-align: center;
+  transition: background-position $transition-base;
+
+  &:hover {
+    background-position: right center;
+  }
+}
+
+.title {
+  font-size: var(--font-size-md);
+  font-family: $font-accent;
+  font-weight: bold;
+
+  &--main {
+    font-size: var(--font-size-lg);
+    color: $color-text-light;
+    text-shadow: $text-shadow-neon;
+  }
 }
