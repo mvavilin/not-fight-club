@@ -38,7 +38,7 @@
   }
 
   &__label {
-    @include flex(row, space-between, stretch, var(--space-sm));
+    @include flex(row, space-between, center, var(--space-sm));
 
     &--wins {
       color: green;
