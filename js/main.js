@@ -1,8 +1,7 @@
-import { checkUser } from './_auth.js';
-import { createUser } from './_user.js';
+import { getUser, createUser } from './_user.js';
 
-document.addEventListener("DOMContentLoaded", () => {
-  if (checkUser()) {
+document.addEventListener('DOMContentLoaded', () => {
+  if (getUser()) {
     window.location.href = 'home.html';
     return;
   }
@@ -18,7 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    if (createUser()) {
+    if (createUser(username)) {
       window.location.href = 'home.html';
       return;
     }

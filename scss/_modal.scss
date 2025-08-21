@@ -37,40 +37,6 @@
     @include flex(column, flex-start, stretch, var(--space-sm));
   }
 
-  &__avatar-wrapper {
-    position: relative;
-    cursor: pointer;
-    width: var(--avatar-container-size);
-    height: var(--avatar-container-size);
-
-    &:hover {
-      &>.modal__avatar {
-        opacity: 0.6;
-      }
-
-      &>.modal__icon {
-        opacity: 1;
-      }
-    }
-  }
-
-  &__avatar {
-    object-fit: cover;
-    width: 100%;
-    height: 100%;
-    transition: opacity $transition-base;
-  }
-
-  &__icon {
-    background-image: url(../assets/images/ui/cosmo_bots_logo.webp);
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    opacity: 0;
-    transition: opacity $transition-base;
-  }
-
   &__label {
     @include flex(row, space-between, stretch, var(--space-sm));
 

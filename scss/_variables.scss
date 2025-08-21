@@ -6,6 +6,8 @@ $font-accent: 'Orbitron', Arial, sans-serif;
 // Цвета
 $color-bg: #fff;
 $color-bg-transparent: rgba(255, 255, 255, 0.7);
+$color-overlay-dark: rgba(0, 0, 0, 0.3);
+$color-overlay-light: rgba(255, 255, 255, 0.3);
 $color-text-dark: #222;
 $color-text-light: #f5f5f5;
 $border-color: #f5f5f5;
@@ -63,5 +65,6 @@ $gradient-base: linear-gradient(135deg, #1a1a40 0%, #4b2e7f 50%, #7f3aff 100%);
   /* 80px */
 
   --icon-container-size: 40rem;
+  --avatar: url('../assets/images/avatars/default_user_avatar.webp');
   --avatar-container-size: 200rem;
 }

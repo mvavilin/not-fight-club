@@ -1,0 +1,39 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  @include flex();
+  transition: left $transition-base;
+
+  &--close {
+    left: -100%;
+  }
+
+  &__container {
+    background-color: $color-bg-transparent;
+    padding: var(--space-md);
+    border-radius: $radius-base;
+    width: 50%;
+    max-height: 75%;
+    overflow-y: auto;
+    scrollbar-width: none;
+  }
+
+  &__title {
+    margin-bottom: var(--space-md);
+    text-align: center;
+  }
+
+  &__avatars-wrapper {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(var(--avatar-container-size), 1fr));
+    gap: var(--space-md);
+    justify-items: center;
+  }
+}

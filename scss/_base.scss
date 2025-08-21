@@ -99,12 +99,108 @@
   }
 }
 
-.icon-ui {
+.icon {
   min-width: var(--icon-container-size);
+  max-width: var(--icon-container-size);
   height: var(--icon-container-size);
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
   border: $border-base;
   border-radius: $radius-full;
+
+  &__wrapper {
+    @include flex();
+    background: $gradient-base;
+  }
+
+  &--ui {
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+
+  &--mask {
+    width: 24rem;
+    height: 24rem;
+    background: $color-bg;
+    mask-position: center center;
+    mask-size: contain;
+    mask-repeat: no-repeat;
+    transition: $transition-base;
+  }
+}
+
+
+.avatar {
+  cursor: pointer;
+  position: relative;
+  width: var(--avatar-container-size);
+  height: var(--avatar-container-size);
+
+  &:hover {
+
+    >.avatar__overlay,
+    >.avatar__icon {
+      opacity: 1;
+    }
+  }
+
+  &__bg {
+    width: var(--avatar-container-size);
+    height: var(--avatar-container-size);
+    background-image: var(--avatar);
+    background-position: center center;
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+
+  &__img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+  }
+
+  &__overlay,
+  &__icon {
+    position: absolute;
+    opacity: 0;
+    transition: opacity $transition-base;
+  }
+
+  &__overlay {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: $color-overlay-light;
+  }
+
+  &__icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    &--mouse-pointer-click {
+      mask-image: url(../assets/images/ui/mouse_pointer_click_icon.svg);
+    }
+
+    &--edit {
+      mask-image: url(../assets/images/ui/edit_icon.svg);
+    }
+  }
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: $color-overlay-dark;
+  opacity: 1;
+  transition: opacity $transition-base;
+
+  &--close {
+    opacity: 0;
+    z-index: -1;
+  }
 }
