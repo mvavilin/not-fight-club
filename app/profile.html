@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../css/main.min.css">
+  <title>Cosmo Bots | Profile</title>
+</head>
+
+<body>
+  <header id="header" class="header"></header>
+
+  <main id="main" class="main">
+    <div class="container container--main">
+      <div class="modal">
+        <div class="modal__header">
+          <h1 class="modal__title modal__title--main title title--main">Profile</h1>
+        </div>
+        <div class="modal__body modal__body--spread">
+          <div class="modal__avatar-wrapper" id="avatar">
+            <img class="modal__avatar" src="../assets/images/avatars/default_user_avatar.webp" alt="">
+            <div class="icon-ui modal__icon"></div>
+          </div>
+          <div class="modal__form-field">
+            <h2 class="modal__title title" id="username">User Registration</h2>
+            <p class="modal__label modal__label--wins"><span>Wins</span> <span id="wins-count">0</span></p>
+            <p class="modal__label modal__label--losses"><span>Losses</span> <span id="losses-count">0</span></p>
+          </div>
+        </div>
+        <div class="modal__footer">
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script type="module" src="../js/profile.js"></script>
+</body>
+
+</html>

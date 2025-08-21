@@ -8,10 +8,10 @@ $color-bg: #fff;
 $color-bg-transparent: rgba(255, 255, 255, 0.7);
 $color-text-dark: #222;
 $color-text-light: #f5f5f5;
-$border-color: #222;
+$border-color: #f5f5f5;
 
 // Бордеры и радиусы
-$border-base: 1px solid $border-color;
+$border-base: 2rem solid $border-color;
 $radius-base: 6rem;
 $radius-full: 50%;
 
@@ -32,6 +32,8 @@ $text-shadow-neon: 0 0 5px $neon-color,
   0 0 20rem rgba($neon-color, 0.7),
   0 0 30rem rgba($neon-color, 0.5),
   0 0 40rem rgba($neon-color, 0.3);
+
+$gradient-base: linear-gradient(135deg, #1a1a40 0%, #4b2e7f 50%, #7f3aff 100%);
 
 // CSS-переменные
 :root {
@@ -59,4 +61,7 @@ $text-shadow-neon: 0 0 5px $neon-color,
   /* 40px */
   --space-xl: calc(var(--space-base) * 4);
   /* 80px */
+
+  --icon-container-size: 40rem;
+  --avatar-container-size: 200rem;
 }

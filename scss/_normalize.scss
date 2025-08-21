@@ -1,4 +1,5 @@
 @use 'variables' as *;
+@use 'mixins' as *;
 
 // Сброс и базовые стили
 *,
@@ -16,6 +17,7 @@ html {
 
 body {
   height: 100%;
+  @include flex(column, flex-start, stretch);
   font-family: $font-main;
   font-size: var(--font-size-base);
   background: $color-bg;
@@ -132,4 +134,25 @@ input[type="submit"],
 button {
   cursor: pointer;
   font: inherit;
+}
+
+nav {
+  margin: 0;
+  padding: 0;
+}
+
+nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+nav li {
+  margin: 0;
+  padding: 0;
+}
+
+nav a {
+  text-decoration: none;
+  color: inherit;
 }

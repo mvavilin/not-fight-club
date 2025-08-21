@@ -1,12 +1,14 @@
-document.addEventListener("DOMContentLoaded", function () {
-  const registerButton = document.getElementById('register-button');
-  const usernameInput = document.getElementById('register-username');
+import { checkUser } from './_auth.js';
+import { createUser } from './_user.js';
 
-  const existingUser = localStorage.getItem('user');
-  if (existingUser) {
-    window.location.href = 'arena.html';
+document.addEventListener("DOMContentLoaded", () => {
+  if (checkUser()) {
+    window.location.href = 'home.html';
     return;
   }
+
+  const registerButton = document.getElementById('register-button');
+  const usernameInput = document.getElementById('register-username');
 
   registerButton.addEventListener('click', () => {
     const username = usernameInput.value.trim();
@@ -16,12 +18,9 @@ document.addEventListener("DOMContentLoaded", function () {
       return;
     }
 
-    const user = {
-      username: username,
-      avatar: null
-    };
-
-    localStorage.setItem('user', JSON.stringify(user));
-    window.location.href = 'arena.html';
+    if (createUser()) {
+      window.location.href = 'home.html';
+      return;
+    }
   });
 });

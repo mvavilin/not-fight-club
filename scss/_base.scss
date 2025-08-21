@@ -24,10 +24,37 @@
 }
 
 // Основные стили макета
+.header {
+  @include flex();
+  padding-top: var(--space-md);
+  padding-bottom: var(--space-md);
+  background: $gradient-base;
+  border-bottom: $border-base;
+
+  &__logo {
+    @include flex(row, flex-start, center, var(--space-md));
+  }
+
+  &__nav {}
+}
+
 .main {
   @include flex();
-  height: 100%;
   background: var(--main-bg-image) center/cover no-repeat;
+  flex: 1;
+}
+
+.container {
+  width: 75%;
+
+  &--header {
+    @include flex(row, space-between, center, var(--safe-space));
+    flex-wrap: wrap;
+  }
+
+  &--main {
+    @include flex();
+  }
 }
 
 .input-fields {
@@ -70,4 +97,14 @@
     color: $color-text-light;
     text-shadow: $text-shadow-neon;
   }
+}
+
+.icon-ui {
+  min-width: var(--icon-container-size);
+  height: var(--icon-container-size);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  border: $border-base;
+  border-radius: $radius-full;
 }

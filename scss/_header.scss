@@ -1,0 +1,41 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+.logo {
+
+  &__icon {
+    background-image: url(../assets/images/ui/cosmo_bots_logo.webp);
+  }
+
+  &__title {}
+}
+
+.nav {
+
+  &__list {
+    @include flex(row, flex-start, center, var(--space-md));
+  }
+
+  &__item {}
+
+  &__link {
+    display: block;
+    border-radius: $radius-full;
+  }
+
+  &__icon {
+    display: block;
+
+    &--arena {
+      background-image: url(../assets/images/ui/arena_icon.webp);
+    }
+
+    &--profile {
+      background-image: url(../assets/images/ui/battle_history_icon.webp);
+    }
+
+    &--settings {
+      background-image: url(../assets/images/ui/profile_icon.webp);
+    }
+  }
+}
