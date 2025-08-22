@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const user = getUser();
 
   startFightButton.addEventListener('click', () => {
-    window.location.href = 'arena.html';
+    window.location.href = './arena.html';
   });
 
   root.style.setProperty('--main-bg-image', 'url(../assets/images/backgrounds/nebula_showdown_bg.webp)');

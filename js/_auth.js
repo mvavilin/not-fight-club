@@ -4,6 +4,6 @@ export function checkUser() {
   if (getUser()) {
     return true;
   }
-  window.location.href = 'index.html';
+  window.location.href = './index.html';
   return false;
 }

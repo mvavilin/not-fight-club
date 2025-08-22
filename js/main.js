@@ -2,7 +2,7 @@ import { getUser, createUser } from './_user.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   if (getUser()) {
-    window.location.href = 'home.html';
+    window.location.href = './home.html';
     return;
   }
 
@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     if (createUser(username)) {
-      window.location.href = 'home.html';
+      window.location.href = './home.html';
       return;
     }
   });

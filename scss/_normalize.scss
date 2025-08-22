@@ -17,7 +17,7 @@ html {
 
 body {
   height: 100%;
-  @include flex(column, flex-start, stretch);
+  @include flex(column, space-between, stretch);
   font-family: $font-main;
   font-size: var(--font-size-base);
   background: $color-bg;
