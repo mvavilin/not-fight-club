@@ -97,6 +97,10 @@
     color: $color-text-light;
     text-shadow: $text-shadow-neon;
   }
+
+  &--item {
+    color: $color-text-light;
+  }
 }
 
 .icon {
@@ -109,6 +113,9 @@
   &__wrapper {
     @include flex();
     background: $gradient-base;
+    background-size: 150% 150%;
+    background-position: left top;
+    transition: all $transition-base;
   }
 
   &--ui {
@@ -141,6 +148,10 @@
     >.avatar__icon {
       opacity: 1;
     }
+
+    >.icon__wrapper {
+      background-position: right center;
+    }
   }
 
   &__bg {
@@ -162,7 +173,6 @@
   &__icon {
     position: absolute;
     opacity: 0;
-    transition: opacity $transition-base;
   }
 
   &__overlay {

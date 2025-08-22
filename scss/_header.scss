@@ -2,32 +2,40 @@
 @use 'mixins' as *;
 
 .logo {
+  text-decoration: none;
 
   &__icon {
+    display: block;
     background-image: url(../assets/images/ui/cosmo_bots_logo.webp);
   }
 
-  &__title {}
+  &__title {
+    display: block;
+    text-decoration: none;
+  }
 }
 
 .nav {
 
   &__list {
-    @include flex(row, flex-start, center, var(--space-md));
+    @include flex(row, flex-start, center, var(--space-lg));
   }
 
   &__item {}
 
   &__link {
-    display: block;
-    border-radius: $radius-full;
+    @include flex(row, flex-start, center, var(--space-md));
+
+    &:hover>.icon__wrapper {
+      background-position: right center;
+    }
   }
 
   &__icon {
     display: block;
 
     &--arena {
-      background-image: url(../assets/images/ui/arena_icon.webp);
+      mask-image: url(../assets/images/ui/arena_icon.svg);
     }
 
     &--profile {
@@ -35,7 +43,7 @@
     }
 
     &--settings {
-      background-image: url(../assets/images/ui/profile_icon.webp);
+      mask-image: url(../assets/images/ui/settings_icon.svg);
     }
   }
 }
