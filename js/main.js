@@ -1,4 +1,4 @@
-import { getUser, createUser } from './_user.js';
+import { getUser, createUser } from './user.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   if (getUser()) {

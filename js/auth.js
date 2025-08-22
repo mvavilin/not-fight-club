@@ -1,4 +1,4 @@
-import { getUser } from './_user.js';
+import { getUser } from './user.js';
 
 export function checkUser() {
   if (getUser()) {

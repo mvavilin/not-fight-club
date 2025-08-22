@@ -1,5 +1,5 @@
-import { checkUser } from './_auth.js';
-import { getUser, saveUser } from './_user.js';
+import { checkUser } from './auth.js';
+import { getUser, saveUser } from './user.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   if (!checkUser()) return;

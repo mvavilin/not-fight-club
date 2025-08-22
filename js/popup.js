@@ -1,6 +1,6 @@
-import { checkUser } from './_auth.js';
-import { getUser, saveUser } from './_user.js';
-import { AVATAR_PATH, avatars } from './_data.js';
+import { checkUser } from './auth.js';
+import { getUser, saveUser } from './user.js';
+import { AVATAR_PATH, avatars } from './data.js';
 
 export function setupPopup() {
   const avatarsWrapper = document.getElementById('avatars-wrapper');

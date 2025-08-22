@@ -1,6 +1,6 @@
-import { checkUser } from './_auth.js';
-import { getUser } from './_user.js';
-import { setupPopup } from './_popup.js';
+import { checkUser } from './auth.js';
+import { getUser } from './user.js';
+import { setupPopup } from './popup.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   if (!checkUser()) return;
