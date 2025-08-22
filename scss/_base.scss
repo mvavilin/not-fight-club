@@ -42,13 +42,15 @@
   @include flex();
   background: var(--main-bg-image) center/cover no-repeat;
   flex: 1;
+  padding-top: var(--space-lg);
+  padding-bottom: var(--space-lg);
 }
 
 .container {
   width: 75%;
 
   &--header {
-    @include flex(row, space-between, center, var(--safe-space));
+    @include flex(row, space-between, center, var(--space-lg));
     flex-wrap: wrap;
   }
 

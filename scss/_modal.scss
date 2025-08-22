@@ -15,8 +15,9 @@
 
   &__title {
 
-    &--main {
+    &--center {
       align-self: center;
+      text-align: center;
     }
   }
 
@@ -29,12 +30,16 @@
     }
 
     &--spread {
-      @include flex(row, space-between, stretch, var(--space-lg));
+      @include flex(row, center, stretch, var(--space-lg));
     }
   }
 
   &__form-field {
     @include flex(column, flex-start, stretch, var(--space-sm));
+
+    &--center {
+      justify-content: center;
+    }
   }
 
   &__label {

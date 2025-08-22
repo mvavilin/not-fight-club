@@ -1,0 +1,97 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+.hitpoints {
+
+  &__bar {
+    position: relative;
+    @include flex();
+    background: $gradient-health-bar;
+  }
+
+  &__text {
+    position: relative;
+    z-index: 10;
+  }
+
+  &__fill {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    background-color: $color-bg;
+
+    &--current-player-hitpoints {
+      width: var(--current-player-hitpoints);
+    }
+
+    &--current-enemy-hitpoints {
+      width: var(--current-enemy-hitpoints);
+    }
+  }
+}
+
+.zones {
+  @include flex(row, space-between, stretch);
+
+  &__group {
+    @include flex(column, flex-start, center, var(--space-sm));
+  }
+
+  &__title {
+    font-weight: bold;
+    text-align: center;
+  }
+
+  &__options {
+    @include flex(column, flex-start, center, var(--space-xs));
+    position: relative;
+  }
+}
+
+.zone {
+
+  &__label {
+    cursor: pointer;
+    text-align: center;
+    flex-grow: 1;
+    width: 100%;
+    padding: var(--space-xs);
+    border-radius: $radius-base;
+    transition: background-color $transition-base;
+  }
+
+  &__selection {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    &:checked+.zone__label--defence {
+      background-color: $defence-color;
+    }
+
+    &:checked+.zone__label--attack {
+      background-color: $attack-color;
+    }
+  }
+}
+
+.battle-log {
+
+  &__title {
+    margin-bottom: var(--space-sm);
+  }
+
+  &__container {
+    padding: var(--space-sm);
+    background-color: $color-bg;
+    height: $battle-log-height;
+    overflow-y: auto;
+  }
+
+  &__list {
+    @include flex(column-reverse, flex-end, stretch);
+    font-size: var(--font-size-sm);
+    // scrollbar-width: none;
+  }
+}

@@ -10,7 +10,105 @@
 </head>
 
 <body>
+  <header id="header" class="header"></header>
 
+  <main id="main" class="main">
+    <div class="container container--main">
+      <div class="modal">
+        <div class="modal__header">
+          <h1 class="modal__title modal__title--center title title--main">Arena</h1>
+        </div>
+        <div class="modal__body modal__body--spread">
+
+          <div class="modal__form-field">
+            <h2 class="modal__title modal__title--center title">Username</h2>
+            <div class="avatar" id="avatar">
+              <div class="avatar__bg avatar__bg--player"></div>
+            </div>
+            <div class="hitpoints">
+              <div class="hitpoints__bar">
+                <span class="hitpoints__text"><span id="current-player-hitpoints">100</span>/<span
+                    id="total-player-hitpoints">100</span> HP</span>
+                <div class="hitpoints__fill hitpoints__fill--current-player-hitpoints"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="modal__form-field modal__form-field--center">
+            <h3 class="modal__title modal__title--center">Select 2 defense zones and 1 attack zone</h3>
+            <div class="zones">
+              <div class="zones__group">
+                <h4 class="zones__title">Defence zones</h4>
+                <div class="zones__options">
+                  <input type="checkbox" id="defence-head" name="defence-zone" value="head" class="zone__selection">
+                  <label class="zone__label zone__label--defence" for="defence-head">Head</label>
+
+                  <input type="checkbox" id="defence-neck" name="defence-zone" value="neck" class="zone__selection">
+                  <label class="zone__label zone__label--defence" for="defence-neck">Neck</label>
+
+                  <input type="checkbox" id="defence-body" name="defence-zone" value="body" class="zone__selection">
+                  <label class="zone__label zone__label--defence" for="defence-body">Body</label>
+
+                  <input type="checkbox" id="defence-belly" name="defence-zone" value="belly" class="zone__selection">
+                  <label class="zone__label zone__label--defence" for="defence-belly">Belly</label>
+
+                  <input type="checkbox" id="defence-legs" name="defence-zone" value="legs" class="zone__selection">
+                  <label class="zone__label zone__label--defence" for="defence-legs">Legs</label>
+                </div>
+              </div>
+
+              <div class="zones__group">
+                <h4 class="zones__title">Attack zones</h4>
+                <div class="zones__options">
+                  <input type="radio" id="attack-head" name="attack-zone" value="head" class="zone__selection">
+                  <label class="zone__label zone__label--attack" for="attack-head">Head</label>
+
+                  <input type="radio" id="attack-neck" name="attack-zone" value="neck" class="zone__selection">
+                  <label class="zone__label zone__label--attack" for="attack-neck">Neck</label>
+
+                  <input type="radio" id="attack-body" name="attack-zone" value="body" class="zone__selection">
+                  <label class="zone__label zone__label--attack" for="attack-body">Body</label>
+
+                  <input type="radio" id="attack-belly" name="attack-zone" value="belly" class="zone__selection">
+                  <label class="zone__label zone__label--attack" for="attack-belly">Belly</label>
+
+                  <input type="radio" id="attack-legs" name="attack-zone" value="legs" class="zone__selection">
+                  <label class="zone__label zone__label--attack" for="attack-legs">Legs</label>
+                </div>
+              </div>
+            </div>
+
+            <button class="button modal__button" type="button" id="attack-button">Attack</button>
+          </div>
+
+          <div class="modal__form-field">
+            <h2 class="modal__title modal__title--center title">Enemy</h2>
+            <div class="avatar" id="enemy-avatar">
+              <div class="avatar__bg avatar__bg--enemy"></div>
+            </div>
+            <div class="hitpoints">
+              <div class="hitpoints__bar">
+                <span class="hitpoints__text"><span id="current-enemy-hitpoints">100</span>/<span
+                    id="total-enemy-hitpoints">100</span> HP</span>
+                <div class="hitpoints__fill hitpoints__fill--current-enemy-hitpoints"></div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div class="modal__footer">
+          <div class="battle-log">
+            <h4 class="battle-log__title title">Battle Log</h4>
+            <div class="battle-log__container">
+              <ul id="battle-log-list" class="battle-log__list"></ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script type="module" src="../js/arena.js"></script>
 </body>
 
 </html>

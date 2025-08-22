@@ -36,6 +36,18 @@ $text-shadow-neon: 0 0 5px $neon-color,
   0 0 40rem rgba($neon-color, 0.3);
 
 $gradient-base: linear-gradient(135deg, #1a1a40 0%, #4b2e7f 50%, #7f3aff 100%);
+$gradient-health-bar: linear-gradient(90deg,
+    #ff6b6b 0%,
+    #ff9e80 20%,
+    #ffd54f 40%,
+    #aed581 60%,
+    #66bb6a 80%,
+    #43a047 100%);
+
+$attack-color: #ff9e80;
+$defence-color: #73c9ce;
+
+$battle-log-height: 160rem;
 
 // CSS-переменные
 :root {
@@ -67,4 +79,8 @@ $gradient-base: linear-gradient(135deg, #1a1a40 0%, #4b2e7f 50%, #7f3aff 100%);
   --icon-container-size: 50rem;
   --avatar: url('../assets/images/avatars/default_user_avatar.webp');
   --avatar-container-size: 200rem;
+
+
+  --current-player-hitpoints: 0%;
+  --current-enemy-hitpoints: 0%;
 }

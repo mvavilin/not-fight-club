@@ -19,6 +19,7 @@
 
   &__list {
     @include flex(row, flex-start, center, var(--space-lg));
+    flex-wrap: wrap
   }
 
   &__item {}

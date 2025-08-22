@@ -16,7 +16,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const usernameInput = document.getElementById('сhange-username');
 
   root.style.setProperty('--main-bg-image', 'url(../assets/images/backgrounds/data_stream_core_bg.webp)');
-  if (user.avatar) root.style.setProperty('--avatar', `url(${user.avatar})`);
   if (usernameEl) usernameEl.textContent = user.username || 'Username';
 
   changeButton.addEventListener('click', () => {
