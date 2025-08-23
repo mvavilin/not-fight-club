@@ -20,6 +20,7 @@
     right: 0;
     height: 100%;
     background-color: $color-bg;
+    transition: width $transition-base;
 
     &--current-player-hitpoints {
       width: var(--current-player-hitpoints);
@@ -90,8 +91,35 @@
   }
 
   &__list {
-    @include flex(column-reverse, flex-end, stretch);
+    @include flex(column-reverse, flex-end, stretch, var(--space-xs));
     font-size: var(--font-size-sm);
     // scrollbar-width: none;
   }
+
+  &__item {
+    display: inline-block;
+    border-radius: $radius-base;
+    font-weight: bold;
+
+    &--attacker,
+    &--attack-zone {
+      padding: calc(var(--space-xs) / 2) var(--space-xs);
+      background-color: $attack-color;
+    }
+
+    &--defence-zone,
+    &--defending {
+      padding: calc(var(--space-xs) / 2) var(--space-xs);
+      background-color: $defence-color;
+    }
+
+    &--damage {}
+
+    &--critical-hit {
+      text-transform: uppercase;
+      color: purple;
+    }
+  }
+
+
 }

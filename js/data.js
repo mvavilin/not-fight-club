@@ -11,7 +11,7 @@ export const avatars = [
 ];
 
 export const player = {
-  name: getUser().name,
+  name: getUser().username,
   avatar: getUser().avatar,
   attackZone: 1,
   defenceZones: 2,
