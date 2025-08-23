@@ -21,7 +21,7 @@
         <div class="modal__body modal__body--spread">
 
           <div class="modal__form-field">
-            <h2 class="modal__title modal__title--center title">Username</h2>
+            <h2 class="modal__title modal__title--center title" id="username">Username</h2>
             <div class="avatar" id="avatar">
               <div class="avatar__bg avatar__bg--player"></div>
             </div>
@@ -40,10 +40,10 @@
               <div class="zones__group">
                 <h4 class="zones__title">Defence zones</h4>
                 <div class="zones__options">
-                  <input type="checkbox" id="defence-head" name="defence-zone" value="head" class="zone__selection">
+                  <input checked type="checkbox" id="defence-head" name="defence-zone" value="head" class="zone__selection">
                   <label class="zone__label zone__label--defence" for="defence-head">Head</label>
 
-                  <input type="checkbox" id="defence-neck" name="defence-zone" value="neck" class="zone__selection">
+                  <input checked type="checkbox" id="defence-neck" name="defence-zone" value="neck" class="zone__selection">
                   <label class="zone__label zone__label--defence" for="defence-neck">Neck</label>
 
                   <input type="checkbox" id="defence-body" name="defence-zone" value="body" class="zone__selection">
@@ -60,7 +60,7 @@
               <div class="zones__group">
                 <h4 class="zones__title">Attack zones</h4>
                 <div class="zones__options">
-                  <input type="radio" id="attack-head" name="attack-zone" value="head" class="zone__selection">
+                  <input checked type="radio" id="attack-head" name="attack-zone" value="head" class="zone__selection">
                   <label class="zone__label zone__label--attack" for="attack-head">Head</label>
 
                   <input type="radio" id="attack-neck" name="attack-zone" value="neck" class="zone__selection">
@@ -82,7 +82,7 @@
           </div>
 
           <div class="modal__form-field">
-            <h2 class="modal__title modal__title--center title">Enemy</h2>
+            <h2 class="modal__title modal__title--center title" id="enemy">Enemy</h2>
             <div class="avatar" id="enemy-avatar">
               <div class="avatar__bg avatar__bg--enemy"></div>
             </div>

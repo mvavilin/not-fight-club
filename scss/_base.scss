@@ -163,6 +163,10 @@
     background-position: center center;
     background-size: contain;
     background-repeat: no-repeat;
+
+    &--enemy {
+      background-image: var(--enemy-avatar);
+    }
   }
 
   &__img {
