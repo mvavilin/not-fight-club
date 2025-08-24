@@ -112,7 +112,7 @@ function resolveAttack(defenceZones, attackZone, attacker, defender) {
     type,
     character: attacker.name,
     minor: defender.name,
-    attackZone: attackZone[0],
+    attackZone: attackZone,
     damage
   };
   printLog(logData);
@@ -166,7 +166,7 @@ export function startBattle(checkedDefence, checkedAttack) {
   };
 
 
-  enemy.attackedZones.forEach(enemyAttackedZone => {
+  enemy.attackedZones.some(enemyAttackedZone => {
     const enemyAttack = resolveAttack(player.blockedZones, enemyAttackedZone, enemy, player);
     player.currentHealth = updateHealth('player', player.currentHealth, player.totalHealth, enemyAttack.damage);
     gameState.attacks.push(enemyAttack);
@@ -176,8 +176,8 @@ export function startBattle(checkedDefence, checkedAttack) {
       const user = getUser();
       user.losses += 1;
       saveUser(user);
-      return;
+      return true;
     };
+    return false;
   });
-
 }
