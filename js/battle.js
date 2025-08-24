@@ -96,7 +96,7 @@ function resolveAttack(defenceZones, attackZone, attacker, defender) {
   const isCritical = Math.random() < attacker.critChance;
   const attackBlocked = defenceZones.includes(...attackZone);
 
-  if (attackBlocked) {
+  if (attackBlocked && !isCritical) {
     type = 'blocked';
   } else {
     damage = attacker.attackPower;
@@ -151,7 +151,7 @@ export function startBattle(checkedDefence, checkedAttack) {
   player.attackedZones = Array.from(checkedAttack).map(input => input.value);
 
   enemy.blockedZones = getRandomDefenceZones(enemy.defenceZones);
-  gameState.enemy.attackedZones = getRandomAttackZone(enemy.attackZone);
+  enemy.attackedZones = getRandomAttackZone(enemy.attackZone);
 
   const playerAttack = resolveAttack(enemy.blockedZones, player.attackedZones, player, enemy);
   enemy.currentHealth = updateHealth('enemy', enemy.currentHealth, enemy.totalHealth, playerAttack.damage);
@@ -165,15 +165,19 @@ export function startBattle(checkedDefence, checkedAttack) {
     return;
   };
 
-  const enemyAttack = resolveAttack(player.blockedZones, enemy.attackedZones, enemy, player);
-  player.currentHealth = updateHealth('player', player.currentHealth, player.totalHealth, enemyAttack.damage);
-  gameState.attacks.push(enemyAttack);
-  updateGameState(gameState);
-  updateGameStateData();
-  if (checkWin(player.currentHealth, enemy.name, player.name)) {
-    const user = getUser();
-    user.losses += 1;
-    saveUser(user);
-    return;
-  };
+
+  enemy.attackedZones.forEach(enemyAttackedZone => {
+    const enemyAttack = resolveAttack(player.blockedZones, enemyAttackedZone, enemy, player);
+    player.currentHealth = updateHealth('player', player.currentHealth, player.totalHealth, enemyAttack.damage);
+    gameState.attacks.push(enemyAttack);
+    updateGameState(gameState);
+    updateGameStateData();
+    if (checkWin(player.currentHealth, enemy.name, player.name)) {
+      const user = getUser();
+      user.losses += 1;
+      saveUser(user);
+      return;
+    };
+  });
+
 }

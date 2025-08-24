@@ -66,13 +66,16 @@ document.addEventListener('DOMContentLoaded', () => {
   const checkboxes = document.querySelectorAll('.zone__selection');
   checkboxes.forEach(checkbox => {
     checkbox.addEventListener('change', () => {
-      const checkedDefence = document.querySelectorAll('input[name="defence-zone"]:checked');
+      let checkedDefence = document.querySelectorAll('input[name="defence-zone"]:checked');
       const checkedAttack = document.querySelectorAll('input[name="attack-zone"]:checked');
-      checkedDefence.length === maxDefence && checkedAttack.length === maxAttack ? attackButton.disabled = false : attackButton.disabled = true;
       player.blockedZones = Array.from(checkedDefence).map(input => input.value);
       player.attackedZones = Array.from(checkedAttack).map(input => input.value);
       updateGameState(gameState);
-      if (checkedDefence.length > maxDefence) checkbox.checked = false;
+      if (checkedDefence.length > maxDefence) {
+        checkbox.checked = false;
+        checkedDefence = document.querySelectorAll('input[name="defence-zone"]:checked');
+      };
+      checkedDefence.length === maxDefence && checkedAttack.length === maxAttack ? attackButton.disabled = false : attackButton.disabled = true;
     });
   });
 

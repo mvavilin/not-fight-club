@@ -55,7 +55,7 @@ export const enemies = [
   {
     name: "Void trickster",
     avatar: avatars[5].name + avatars[5].ext,
-    attackZone: 1,
+    attackZone: 2,
     defenceZones: 2,
     currentHealth: 100,
     totalHealth: 100,
