@@ -67,7 +67,7 @@ export function printLog({ type, character = null, minor = null, attackZone = nu
       let seconds = 5;
 
       const timer = setInterval(() => {
-        log = `Arena will close in ${seconds}...`
+        log = `Click on the logo to go to the homepage. Arena will close in ${seconds}...`
         seconds--;
 
         if (seconds === 0) {
