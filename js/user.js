@@ -2,12 +2,12 @@ const USER_KEY = 'user';
 
 export function getUser() {
   const data = localStorage.getItem(USER_KEY);
-  if (!data) return null;
+  if (!data) return '';
   try {
     return JSON.parse(data);
   } catch (e) {
     console.error('Ошибка парсинга user из localStorage:', e);
-    return null;
+    return '';
   }
 }
 

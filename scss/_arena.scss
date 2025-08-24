@@ -101,14 +101,14 @@
     border-radius: $radius-base;
     font-weight: bold;
 
-    &--attacker,
+    &--character,
     &--attack-zone {
       padding: calc(var(--space-xs) / 2) var(--space-xs);
       background-color: $attack-color;
     }
 
     &--defence-zone,
-    &--defending {
+    &--minor {
       padding: calc(var(--space-xs) / 2) var(--space-xs);
       background-color: $defence-color;
     }
@@ -120,6 +120,4 @@
       color: purple;
     }
   }
-
-
 }

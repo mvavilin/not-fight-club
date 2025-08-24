@@ -1,12 +1,9 @@
-import { AVATAR_PATH, player, enemies, zones } from './data.js';
+import { zones } from './data.js';
+import { getUser, saveUser } from './user.js';
+import { getGameState, updateGameState, deleteGameState } from './game.js';
 
 const root = document.documentElement;
 let logCounter = 1;
-
-function chooseRandomEnemy() {
-  const randomIndex = Math.floor(Math.random() * enemies.length);
-  return enemies[randomIndex];
-}
 
 const getRandomDefenceZones = numZones => getRandomZones(zones, numZones);
 const getRandomAttackZone = numZones => getRandomZones(zones, numZones);
@@ -16,95 +13,167 @@ function getRandomZones(zones, numZones) {
   return shuffled.slice(0, numZones);
 }
 
-function resolveAttack(defenceZones, attackZone, attacker, defending, battleLog) {
+function createItem(content, ...classes) {
+  if (!content) return null;
+  const item = document.createElement('span');
+  if (classes.length > 0) item.classList.add(...classes);
+  item.textContent = content;
+  return item.outerHTML;
+}
+
+function checkWin(health, winner, loser) {
+  if (health <= 0) {
+    const attackButton = document.getElementById('attack-button');
+    attackButton.disabled = true;
+    printLog({ type: 'result', character: winner, minor: loser });
+    deleteGameState();
+    printLog({ type: 'exit' });
+    return true;
+  }
+
+  return false;
+}
+
+export function printLog({ type, character = null, minor = null, attackZone = null, damage = null }) {
+  const logList = document.getElementById("battle-log-list");
+  const logItem = document.createElement('li');
+
+  const characterItem = createItem(character, 'battle-log__item', 'battle-log__item--character');
+  const minorItem = createItem(minor, 'battle-log__item', 'battle-log__item--minor');
+  const attackZoneItem = createItem(attackZone, 'battle-log__item', 'battle-log__item--attack-zone');
+  const damageItem = createItem(`${damage} damage`, 'battle-log__item', 'battle-log__item--damage');
+
+  let log = '';
+
+  switch (type) {
+    case 'blocked':
+      // 
+      const defenceZoneItem = createItem(attackZone, 'battle-log__item', 'battle-log__item--defence-zone');
+      log = `${characterItem} attacked ${defenceZoneItem}, but it was blocked by ${minorItem}.`;
+      break;
+    case 'critical':
+      const criticalHitItem = createItem('critical hit', 'battle-log__item', 'battle-log__item--critical-hit');
+      log = `${characterItem} delivered a ${criticalHitItem} of ${damageItem} in ${minorItem}'s ${attackZoneItem}!`
+      break;
+    case 'attack':
+      log = `${characterItem} attacked ${minorItem}'s ${attackZoneItem} for ${damageItem}.`
+      break;
+    case 'result':
+      log = `${characterItem} turned out to be stronger than ${minorItem}!`
+      logItem.innerHTML = `${log}`;
+      logList.appendChild(logItem);
+      return;
+    case 'exit':
+      let seconds = 5;
+
+      const timer = setInterval(() => {
+        log = `Arena will close in ${seconds}...`
+        seconds--;
+
+        if (seconds === 0) {
+          clearInterval(timer);
+          log = 'Arena is now closed!';
+          window.location.href = './home.html';
+        }
+
+        logItem.innerHTML = `${log}`;
+        logList.appendChild(logItem);
+      }, 1000);
+
+      return;
+  }
+
+  logItem.innerHTML = `${logCounter} ${log}`;
+  logList.appendChild(logItem);
+
+  logCounter++;
+}
+
+function resolveAttack(defenceZones, attackZone, attacker, defender) {
+  let type = '';
   let damage = 0;
+  let logData = {};
   const isCritical = Math.random() < attacker.critChance;
   const attackBlocked = defenceZones.includes(...attackZone);
 
-  // <span style="color:red">
-  // </span>
-
   if (attackBlocked) {
-    // U 1
-    battleLog.push(`<span class="battle-log__item battle-log__item--attacker">${attacker.name}</span> attacked <span class="battle-log__item battle-log__item--defence-zone">${attackZone}</span>, but it was blocked by <span class="battle-log__item battle-log__item--defending">${defending.name}</span>.`);
+    type = 'blocked';
   } else {
     damage = attacker.attackPower;
     if (isCritical) {
       damage = Math.floor(damage * attacker.critMultiplier);
-      // U 1
-      battleLog.push(`<span class="battle-log__item battle-log__item--attacker">${attacker.name}</span> delivered a <span class="battle-log__item battle-log__item--critical-hit">critical hit</span> of <span class="battle-log__item battle-log__item--damage">${damage} damage</span> in <span class="battle-log__item battle-log__item--defending">${defending.name}'s</span> <span class="battle-log__item battle-log__item--attack-zone">${attackZone}</span>!`);
+      type = 'critical';
     } else {
-      // U 1
-      battleLog.push(`<span class="battle-log__item battle-log__item--attacker">${attacker.name}</span>  attacked <span class="battle-log__item battle-log__item--defending">${defending.name}'s</span> <span class="battle-log__item battle-log__item--attack-zone">${attackZone}</span> for <span class="battle-log__item battle-log__item--damage">${damage} damage</span>.`);
+      type = 'attack';
     }
   }
 
-  return damage;
+  logData = {
+    type,
+    character: attacker.name,
+    minor: defender.name,
+    attackZone: attackZone[0],
+    damage
+  };
+  printLog(logData);
+
+  return logData;
 }
 
-function updateHealth(playerDamage, enemyDamage) {
-  const playerHealth = document.getElementById("current-player-hitpoints");
-  const enemyHealth = document.getElementById("current-enemy-hitpoints");
+export function updateHealth(character, currentHealth, totalHealth, damage = 0) {
+  const currentHealthEl = document.getElementById(`current-${character}-hitpoints`);
+  let newCurrentHealth = currentHealth - damage;
 
-  let playerNewHealth = parseInt(playerHealth.innerText) - enemyDamage;
-  let enemyNewHealth = parseInt(enemyHealth.innerText) - playerDamage;
-
-  // U
-  if (playerNewHealth < 0) {
-    playerHealth.innerText = 0;
-    root.style.setProperty('--current-player-hitpoints', `100%`);
+  if (newCurrentHealth < 0) {
+    currentHealthEl.innerText = 0;
+    root.style.setProperty(`--current-${character}-hitpoints`, `100%`);
   } else {
-    playerHealth.innerText = playerNewHealth;
-    root.style.setProperty('--current-player-hitpoints', `${(player.health - playerNewHealth) * 100 / player.health}%`);
+    currentHealthEl.innerText = newCurrentHealth;
+    root.style.setProperty(`--current-${character}-hitpoints`, `${(totalHealth - newCurrentHealth) * 100 / totalHealth}%`);
   }
 
-  // U
-  if (enemyNewHealth < 0) {
-    enemyHealth.innerText = 0;
-    root.style.setProperty('--current-enemy-hitpoints', `100%`);
-  } else {
-    enemyHealth.innerText = enemyNewHealth;
-    root.style.setProperty('--current-enemy-hitpoints', `${(enemy.health - enemyNewHealth) * 100 / enemy.health}%`);
-  }
+  return newCurrentHealth;
 }
-
-function updateBattleLog(battleLog) {
-  const logList = document.getElementById("battle-log-list");
-  // U 1
-  battleLog.forEach(entry => {
-    const logItem = document.createElement('li');
-
-    logItem.innerHTML = `${logCounter} ${entry}`;
-    logList.appendChild(logItem);
-
-    logCounter++;
-  });
-}
-
-const enemy = chooseRandomEnemy();
-document.getElementById("current-player-hitpoints").innerText = player.health;
-document.getElementById("current-enemy-hitpoints").innerText = enemy.health;
-document.getElementById("total-player-hitpoints").innerText = player.health;
-document.getElementById("total-enemy-hitpoints").innerText = enemy.health;
-document.getElementById('enemy').textContent = enemy.name;
-root.style.setProperty('--enemy-avatar', `url(${AVATAR_PATH + enemy.avatar})`);
 
 export function startBattle(checkedDefence, checkedAttack) {
-  const playerDefenceZones = Array.from(checkedDefence).map(input => input.value);
-  const playerAttackZone = Array.from(checkedAttack).map(input => input.value);
+  const updateGameStateData = () => {
+    gameState = getGameState();
+    player = gameState.player;
+    enemy = gameState.enemy;
+    attacks = gameState.attacks;
+  }
+  let gameState = getGameState();
+  let player = gameState.player;
+  let enemy = gameState.enemy;
+  let attacks = gameState.attacks;
 
-  const enemyDefenceZones = getRandomDefenceZones(enemy.defenceZones);
-  const enemyAttackZone = getRandomAttackZone(enemy.attackZone);
+  player.blockedZones = Array.from(checkedDefence).map(input => input.value);
+  player.attackedZones = Array.from(checkedAttack).map(input => input.value);
 
-  // U 1
-  const battleLog = [];
-  const playerAttack = resolveAttack(enemyDefenceZones, playerAttackZone, player, enemy, battleLog);
-  const enemyAttack = resolveAttack(playerDefenceZones, enemyAttackZone, enemy, player, battleLog);
+  enemy.blockedZones = getRandomDefenceZones(enemy.defenceZones);
+  gameState.enemy.attackedZones = getRandomAttackZone(enemy.attackZone);
 
-  console.log(playerAttack);
-  console.log(enemyAttack);
+  const playerAttack = resolveAttack(enemy.blockedZones, player.attackedZones, player, enemy);
+  enemy.currentHealth = updateHealth('enemy', enemy.currentHealth, enemy.totalHealth, playerAttack.damage);
+  attacks.push(playerAttack);
+  updateGameState(gameState);
+  updateGameStateData();
+  if (checkWin(enemy.currentHealth, player.name, enemy.name)) {
+    const user = getUser();
+    user.wins += 1;
+    saveUser(user);
+    return;
+  };
 
-  updateHealth(playerAttack, enemyAttack);
-
-  updateBattleLog(battleLog);
+  const enemyAttack = resolveAttack(player.blockedZones, enemy.attackedZones, enemy, player);
+  player.currentHealth = updateHealth('player', player.currentHealth, player.totalHealth, enemyAttack.damage);
+  gameState.attacks.push(enemyAttack);
+  updateGameState(gameState);
+  updateGameStateData();
+  if (checkWin(player.currentHealth, enemy.name, player.name)) {
+    const user = getUser();
+    user.losses += 1;
+    saveUser(user);
+    return;
+  };
 }

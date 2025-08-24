@@ -12,8 +12,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const user = getUser();
   const usernameEl = document.getElementById('username');
   const usernameElNav = document.getElementById('username-nav');
-  const changeButton = document.getElementById('сhange-button');
-  const usernameInput = document.getElementById('сhange-username');
+  const changeButton = document.getElementById('change-button');
+  const usernameInput = document.getElementById('change-username');
 
   root.style.setProperty('--main-bg-image', 'url(../assets/images/backgrounds/data_stream_core_bg.webp)');
   if (usernameEl) usernameEl.textContent = user.username || 'Username';
